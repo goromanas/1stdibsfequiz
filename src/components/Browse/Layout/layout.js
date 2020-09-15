@@ -1,19 +1,20 @@
-import React from "react"
+import React from "react";
 import { Link } from 'react-router-dom';
+
+import Item from '../Item/item';
+
+import layoutStyles from './layout.module.scss';
 
 const Layout = ({ items }) => {
   return (
-    <>
+    <div className={layoutStyles.layout}>
       {items.map(item => (
-        <div>
-          <Link to={`/item/${item.id}`}>
-            {item.title}
-          </Link>
-          <img src={item.image} />
-        </div>
+        <Item
+          item={item}
+        />
       ))
       }
-    </>
+    </div>
   )
 }
 

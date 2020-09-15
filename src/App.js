@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Browse from './components/Browse/browse'
 import Container from './components/Container/container'
-import Item from './components/Item/item'
+import Item from './components/SingleItem/single-item'
 
 function App() {
   return (
