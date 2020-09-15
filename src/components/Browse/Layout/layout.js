@@ -5,12 +5,14 @@ import Item from '../Item/item';
 
 import layoutStyles from './layout.module.scss';
 
-const Layout = ({ items }) => {
+const Layout = ({ items, elementRef }) => {
   return (
     <div className={layoutStyles.layout}>
       {items.map(item => (
         <Item
-          item={item}
+          key={item.id}
+          id={item.id}
+          image={item.image}
         />
       ))
       }

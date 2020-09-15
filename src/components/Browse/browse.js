@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
 
 import Layout from './Layout/layout'
@@ -10,6 +10,11 @@ const Browse = () => {
   const [items, setItems] = useState([]);
   const [start, setStart] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [dataLength, setDataLength] = useState(0);
+
+  const itemList = useRef(null);
+
+  const limit = 9;
 
   async function fetchBrowse(browseRequest) {
     setLoading(true);
@@ -17,11 +22,14 @@ const Browse = () => {
       const response = await Axios.get(`/browse`, {
         params: {
           start: start,
+          limit: limit,
         }
       }, { cancelToken: browseRequest.token });
-      setItems(response.data.items);
+      setItems([...items, ...response.data.items]);
       setLoading(false);
-      console.log(response.data.items);
+      if (dataLength == 0) setDataLength(response.data.totalItems);
+      console.log(response.data);
+
     } catch (e) {
       console.log("There was a problem or the request was cancelled.");
     }
@@ -38,6 +46,7 @@ const Browse = () => {
   useEffect(() => {
     const browseRequest = Axios.CancelToken.source();
     fetchBrowse(browseRequest);
+
     return () => {
       browseRequest.cancel();
     };
@@ -51,16 +60,25 @@ const Browse = () => {
         ? <Loader />
         :
         <>
-          <Layout items={items} />
-          <LoadMoreButton />
+          <Layout
+            items={items}
+            ref={itemList}
+          />
+          {start + limit < dataLength
+            ?
+            <LoadMoreButton
+              handleLoadMore={handleLoadMore}
+            />
+            :
+            ''
+          }
         </>
       }
-
     </>
   )
 
   function handleLoadMore() {
-    setStart(start + 9);
+    setStart(prevStart => prevStart + 9);
   }
 }
 

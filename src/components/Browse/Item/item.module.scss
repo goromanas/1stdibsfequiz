@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .item {
   margin: 1rem;
   padding: .5rem;
@@ -6,6 +8,6 @@
   background: #fff;
 
   &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: $boxShadow;
   }
 }

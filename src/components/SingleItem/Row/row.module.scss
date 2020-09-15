@@ -1,4 +1,12 @@
+@import '../../../styles/variables.scss';
+
 .row {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 1rem;
+  padding: .5rem;
+  background: #fff;
+  box-shadow: $boxShadow;
 }

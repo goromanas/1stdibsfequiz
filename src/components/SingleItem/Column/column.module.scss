@@ -1,4 +1,7 @@
 .column {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: .5rem;
 }

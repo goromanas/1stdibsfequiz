@@ -4,7 +4,7 @@ import columnStyles from './column.module.scss';
 
 const Column = ({ children }) => {
   return (
-    <div className={columnStyles.Column}>
+    <div className={columnStyles.column}>
       {children}
     </div>
   )
