@@ -8,42 +8,38 @@ import Row from './Row/row';
 import Loader from '../Loader/loader';
 import Image from '../Image/image';
 import Buttons from './Buttons/buttons';
+import Meta from './Meta/meta';
+import Description from './Description/description';
 
 import singleItemStyles from './single-item.module.scss';
+
 
 const Item = () => {
 
   const { id } = useParams();
 
-  const initialState = {
-    seller: {
-      company: ''
-    }
-  }
-
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState({});
 
-  async function fetchItem(itemRequest) {
-    setLoading(true);
-    setItem(initialState);
-    try {
-      const response = await Axios.get(`/item/${id}`, { cancelToken: itemRequest.token });
-      setItem(response.data);
-      setLoading(false);
-      console.log(response.data);
-    } catch (e) {
-      console.log("There was a problem or the request was cancelled.");
-    }
-  }
+
 
   useEffect(() => {
-    const browseRequest = Axios.CancelToken.source();
-    fetchItem(browseRequest);
+    const itemRequest = Axios.CancelToken.source();
+    async function fetchItem() {
+      setLoading(true);
+      try {
+        const response = await Axios.get(`/item/${id}`, { cancelToken: itemRequest.token });
+        setItem(response.data);
+        setLoading(false);
+      } catch (e) {
+        console.log("There was a problem or the request was cancelled.");
+      }
+    }
+    fetchItem();
     return () => {
-      browseRequest.cancel();
+      itemRequest.cancel();
     };
-  }, []);
+  }, [id]);
   return (
     <>
       {loading ? <Loader /> : <>
@@ -60,32 +56,23 @@ const Item = () => {
             <Image
               image={item.image}
               alt={item.vertical}
+              page='single'
             />
           </Column>
           <Column>
             <Row>
-              <h3
-                className={singleItemStyles.singleItemtitle}
-              >
-                {item.title}
-              </h3>
+              <Meta
+                title={item.title}
+                price={item.price}
+                measurements={item.measurements}
+              />
               <Buttons />
             </Row>
             <Row>
-              <span>
-                {item.description}
-              </span>
-              {item.creators
-                ? <div className={singleItemStyles.singleItemcreator}>
-                  Creator:
-                   <span className={singleItemStyles.singleItemauthor}>
-                    {' '}
-                    {item.creators}
-                  </span>
-                </div>
-                : ''
-              }
-
+              <Description
+                description={item.description}
+                creators={item.creators}
+              />
             </Row>
           </Column>
         </Layout>

@@ -1,0 +1,12 @@
+@import '../../../styles/variables.scss';
+
+.description {
+  &creator {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+
+  &author {
+    font-weight: 400;
+  }
+}

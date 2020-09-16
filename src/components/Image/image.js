@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 
 import imageStyles from './image.module.scss';
 
-const Image = ({ image, alt, title }) => (
+const Image = ({ image, alt, title, page }) => (
   <div className={imageStyles.imagewrapper}>
     <img
       src={image}
@@ -12,6 +12,15 @@ const Image = ({ image, alt, title }) => (
       data-tip={title}
     />
     <ReactTooltip />
+    <img
+      src={process.env.PUBLIC_URL + '/icons/heart.svg'}
+      className={
+        page === 'single' ? imageStyles.imageheartsingle :
+          page === 'browse' ? imageStyles.imageheartbrowse :
+            ''
+      }
+      alt='heart-icon'
+    />
   </div>
 )
 

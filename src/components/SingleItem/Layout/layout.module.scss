@@ -3,4 +3,6 @@
 .layout {
   background-color: $grey1;
   display: flex;
+  min-height: 350px;
+  justify-content: space-evenly;
 }

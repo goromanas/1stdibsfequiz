@@ -26,11 +26,10 @@ const Browse = () => {
         }
       }, { cancelToken: browseRequest.token });
       setItems(prevItems => {
-        return [...prevItems, ...response.data.items]
+        return [...items, ...response.data.items]
       });
       setLoading(false);
       if (dataLength === 0) setDataLength(response.data.totalItems);
-      console.log(response.data);
 
     } catch (e) {
       console.log("There was a problem or the request was cancelled.");
@@ -42,7 +41,7 @@ const Browse = () => {
     fetchBrowse(browseRequest);
     return () => {
       browseRequest.cancel();
-    };
+    };// eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const Browse = () => {
 
     return () => {
       browseRequest.cancel();
-    };
+    };// eslint-disable-next-line
   }, [start]);
 
 
@@ -60,23 +59,23 @@ const Browse = () => {
       <h1 className={browseStyles.browsetitle}>
         Browse page
         </h1>
-      {loading
-        ? <Loader />
-        :
-        <>
-          <Layout
-            items={items}
+      <>
+        <Layout
+          items={items}
+        />
+        {loading
+          ? <Loader />
+          : ''
+        }
+        {start + limit < dataLength
+          ?
+          <LoadMoreButton
+            handleLoadMore={handleLoadMore}
           />
-          {start + limit < dataLength
-            ?
-            <LoadMoreButton
-              handleLoadMore={handleLoadMore}
-            />
-            :
-            ''
-          }
-        </>
-      }
+          :
+          ''
+        }
+      </>
     </div>
   )
 

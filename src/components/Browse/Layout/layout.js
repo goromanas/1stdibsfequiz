@@ -14,6 +14,7 @@ const Layout = ({ items, elementRef }) => {
           image={item.image}
           vertical={item.vertical}
           title={item.title}
+          price={item.price ? item.price.amounts.USD : 'Price upon request'}
         />
       ))
       }

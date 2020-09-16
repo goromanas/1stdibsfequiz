@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../styles//variables.scss';
 
 .singleItem {
   &seller {
@@ -14,19 +14,5 @@
     position: relative;
     top: -1.2rem;
     color: $primary;
-  }
-
-  &title {
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-
-  &creator {
-    margin-top: 1rem;
-    font-weight: 600;
-  }
-
-  &author {
-    font-weight: 400;
   }
 }

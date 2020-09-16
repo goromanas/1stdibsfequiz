@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.meta {
+  &title {
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  &price {
+    color: $primary;
+    margin: 1rem 0;
+  }
+
+  &measurements {
+    color: $fontColor;
+  }
+}

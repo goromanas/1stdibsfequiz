@@ -13,6 +13,7 @@ const Item = ({ id, image, price, vertical, title }) => {
           image={image}
           alt={vertical}
           title={title}
+          page='browse'
         />
       </Link>
       <span>
