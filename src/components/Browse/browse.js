@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 import Layout from './Layout/layout'
@@ -14,8 +14,6 @@ const Browse = () => {
   const [loading, setLoading] = useState(false);
   const [dataLength, setDataLength] = useState(0);
 
-  const itemList = useRef(null);
-
   const limit = 9;
 
   async function fetchBrowse(browseRequest) {
@@ -27,9 +25,9 @@ const Browse = () => {
           limit: limit,
         }
       }, { cancelToken: browseRequest.token });
-      setItems([...items, ...response.data.items]);
+      await setItems([...items, ...response.data.items]);
       setLoading(false);
-      if (dataLength == 0) setDataLength(response.data.totalItems);
+      if (dataLength === 0) setDataLength(response.data.totalItems);
       console.log(response.data);
 
     } catch (e) {
@@ -66,7 +64,6 @@ const Browse = () => {
         <>
           <Layout
             items={items}
-            ref={itemList}
           />
           {start + limit < dataLength
             ?

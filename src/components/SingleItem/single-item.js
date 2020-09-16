@@ -7,6 +7,7 @@ import Column from './Column/column';
 import Row from './Row/row';
 import Loader from '../Loader/loader';
 import Image from '../Image/image';
+import Buttons from './Buttons/buttons';
 
 import singleItemStyles from './single-item.module.scss';
 
@@ -63,18 +64,28 @@ const Item = () => {
           </Column>
           <Column>
             <Row>
-              <h3>{item.title}</h3>
+              <h3
+                className={singleItemStyles.singleItemtitle}
+              >
+                {item.title}
+              </h3>
+              <Buttons />
             </Row>
             <Row>
               <span>
                 {item.description}
               </span>
-              <p>
-                Creator:
-              <span>
-                  {item.creators}
-                </span>
-              </p>
+              {item.creators
+                ? <div className={singleItemStyles.singleItemcreator}>
+                  Creator:
+                   <span className={singleItemStyles.singleItemauthor}>
+                    {' '}
+                    {item.creators}
+                  </span>
+                </div>
+                : ''
+              }
+
             </Row>
           </Column>
         </Layout>
