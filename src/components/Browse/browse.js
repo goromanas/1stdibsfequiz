@@ -25,7 +25,9 @@ const Browse = () => {
           limit: limit,
         }
       }, { cancelToken: browseRequest.token });
-      await setItems([...items, ...response.data.items]);
+      setItems(prevItems => {
+        return [...prevItems, ...response.data.items]
+      });
       setLoading(false);
       if (dataLength === 0) setDataLength(response.data.totalItems);
       console.log(response.data);
