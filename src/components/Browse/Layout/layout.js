@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 
 import Item from '../Item/item';
 
@@ -9,11 +8,15 @@ const Layout = ({ items, elementRef }) => {
   return (
     <div className={layoutStyles.layout}>
       {items.map(item => (
-        <Item
-          key={item.id}
-          id={item.id}
-          image={item.image}
-        />
+        <>
+          <Item
+            key={item.id}
+            id={item.id}
+            image={item.image}
+            vertical={item.vertical}
+            title={item.title}
+          />
+        </>
       ))
       }
     </div>

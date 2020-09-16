@@ -5,6 +5,8 @@ import Layout from './Layout/layout'
 import Loader from '../Loader/loader'
 import LoadMoreButton from './LoadMoreButton/load-more-button'
 
+import browseStyles from './browse.module.scss';
+
 const Browse = () => {
 
   const [items, setItems] = useState([]);
@@ -54,8 +56,10 @@ const Browse = () => {
 
 
   return (
-    <>
-      <h1>Browse page</h1>
+    <div className={browseStyles.browse}>
+      <h1 className={browseStyles.browsetitle}>
+        Browse page
+        </h1>
       {loading
         ? <Loader />
         :
@@ -74,7 +78,7 @@ const Browse = () => {
           }
         </>
       }
-    </>
+    </div>
   )
 
   function handleLoadMore() {

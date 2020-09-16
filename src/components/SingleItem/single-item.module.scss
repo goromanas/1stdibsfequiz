@@ -1,0 +1,15 @@
+.singleItem {
+  &seller {
+    text-align: center;
+    position: relative;
+    margin-top: 2rem;
+    font-weight: 300;
+    letter-spacing: .3rem;
+    text-transform: uppercase;
+  }
+
+  &back {
+    position: relative;
+    top: -1.2rem;
+  }
+}

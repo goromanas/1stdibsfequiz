@@ -6,6 +6,9 @@ import Layout from './Layout/layout';
 import Column from './Column/column';
 import Row from './Row/row';
 import Loader from '../Loader/loader';
+import Image from '../Image/image';
+
+import singleItemStyles from './single-item.module.scss';
 
 const Item = () => {
 
@@ -43,18 +46,24 @@ const Item = () => {
   return (
     <>
       {loading ? <Loader /> : <>
+        <h2 className={singleItemStyles.singleItemseller}>
+          {item.seller !== undefined ? item.seller.company : ''}
+        </h2>
         <Link to={'/'}>
-          <span>&#8249; Home</span>
+          <span className={singleItemStyles.singleItemback}>
+            &#8249; Home
+         </span>
         </Link>
-        <h2>{item.seller !== undefined ? item.seller.company : ''}</h2>
         <Layout>
           <Column>
-            <img src={item.image} />
+            <Image
+              image={item.image}
+              alt={item.vertical}
+            />
           </Column>
           <Column>
             <Row>
               <h3>{item.title}</h3>
-              {/* <span>{item.measurements.display}</span> */}
             </Row>
             <Row>
               <span>

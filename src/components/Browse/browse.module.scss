@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.browse {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+
+  &title {
+    font-weight: 600;
+    letter-spacing: .5rem;
+    color: $secondary;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+}

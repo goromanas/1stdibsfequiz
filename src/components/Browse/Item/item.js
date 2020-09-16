@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 
 import itemStyles from './item.module.scss';
 
-const Item = ({ id, image, price }) => {
+import Image from '../../Image/image';
+
+const Item = ({ id, image, price, vertical, title }) => {
   return (
     <div className={itemStyles.item}>
       <Link to={`/item/${id}`}>
-        <img src={image} />
+        <Image
+          image={image}
+          alt={vertical}
+          title={title}
+        />
       </Link>
       <span>
         {price}

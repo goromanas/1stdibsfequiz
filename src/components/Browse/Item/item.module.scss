@@ -3,11 +3,11 @@
 .item {
   margin: 1rem;
   padding: .5rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: $boxShadow;
   transition: 0.3s;
   background: #fff;
 
   &:hover {
-    box-shadow: $boxShadow;
+    box-shadow: $boxShadowHover;
   }
 }
