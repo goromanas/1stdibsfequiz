@@ -43,7 +43,7 @@
     "devDependencies": {
         "nodemon": "^1.17.5"
     },
-    "proxy": "http://localhost:3001",
+    "proxy": "http://localhost:8080",
     "browserslist": {
         "production": [
             ">0.2%",

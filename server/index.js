@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs')
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
@@ -11,11 +11,10 @@ app.use('/item', require('./routes/itemRouter'));
 app.use('/favorites', require('./routes/favoritesRoute'));
 
 app.post('/saveFavorites', function (req, res) {
-    console.log('post request ' + req.body.items);
     let data = JSON.stringify(req.body.items);
-    console.log(data);
     fs.writeFile('./server/data/favorites.json', data, (err) => {
         if (err) return console.log(err);
+        res.send('Item saved');
     });
 })
 

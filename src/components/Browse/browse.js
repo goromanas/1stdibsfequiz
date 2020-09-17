@@ -7,6 +7,7 @@ import Layout from './Layout/layout'
 import Loader from '../Loader/loader'
 import LoadMoreButton from './LoadMoreButton/load-more-button'
 
+
 import browseStyles from './browse.module.scss';
 
 const Browse = () => {
@@ -23,7 +24,7 @@ const Browse = () => {
   async function fetchBrowse(browseRequest) {
     setLoading(true);
     try {
-      const response = await Axios.get(`/browse`, {
+      const response = await Axios.get('/browse', {
         params: {
           start: start,
           limit: limit,

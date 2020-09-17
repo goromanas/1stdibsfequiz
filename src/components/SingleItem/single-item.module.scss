@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import '../../styles/variables.scss';
 
 .singleItem {
   &seller {
@@ -8,11 +8,5 @@
     font-weight: 300;
     letter-spacing: .3rem;
     text-transform: uppercase;
-  }
-
-  &back {
-    position: relative;
-    top: -1.2rem;
-    color: $primary;
   }
 }

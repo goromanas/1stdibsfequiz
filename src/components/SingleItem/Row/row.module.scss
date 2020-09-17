@@ -8,4 +8,10 @@
   padding: .5rem;
   background: #fff;
   box-shadow: $boxShadow;
+  margin: 1rem 0;
+
+  @media (min-width: 800px) {
+    margin: 0;
+  }
+
 }

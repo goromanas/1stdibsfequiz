@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from "react-router-dom";
 import Axios from 'axios';
+
+import DispatchContext from '../../DispatchContext';
 
 import Layout from './Layout/layout';
 import Column from './Column/column';
@@ -10,14 +12,18 @@ import Image from '../Image/image';
 import Buttons from './Buttons/buttons';
 import Meta from './Meta/meta';
 import Description from './Description/description';
+import Navigation from './Navigation/navigation';
 
 import singleItemStyles from './single-item.module.scss';
+
 import FavoriteIcon from '../FavoriteIcon/favorite-icon';
 
 
 const Item = () => {
 
   const { id } = useParams();
+
+  const appDispatch = useContext(DispatchContext);
 
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState({});
@@ -34,10 +40,23 @@ const Item = () => {
         console.log("There was a problem or the request was cancelled.");
       }
     }
-    fetchItem();
+
+    async function fetchFavorites(browseRequest) {
+      setLoading(true);
+      try {
+        const response = await Axios.get(`/favorites`, { cancelToken: browseRequest.token });
+        appDispatch({ type: 'setFavorites', data: response.data.items });
+        setLoading(false);
+
+      } catch (e) {
+        console.log("There was a problem or the request was cancelled.");
+      }
+    }
+    fetchItem(itemRequest);
+    fetchFavorites(itemRequest);
     return () => {
       itemRequest.cancel();
-    };
+    }; // eslint-disable-next-line
   }, [id]);
   return (
     <>
@@ -45,11 +64,7 @@ const Item = () => {
         <h2 className={singleItemStyles.singleItemseller}>
           {item.seller !== undefined ? item.seller.company : ''}
         </h2>
-        <Link to={'/'}>
-          <span className={singleItemStyles.singleItemback}>
-            &#8249; Home
-         </span>
-        </Link>
+        <Navigation />
         <Layout>
           <Column>
             <Image
@@ -63,7 +78,6 @@ const Item = () => {
                 page='single'
               />
             </Image>
-
           </Column>
           <Column>
             <Row>

@@ -5,4 +5,9 @@
   display: flex;
   min-height: 350px;
   justify-content: space-evenly;
+  flex-direction: column;
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+  }
 }
