@@ -10,4 +10,10 @@
   &:hover {
     box-shadow: $boxShadowHover;
   }
+
+  &info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import itemStyles from './item.module.scss';
 
 import Image from '../../Image/image';
+import FavoriteIcon from "../../FavoriteIcon/favorite-icon";
 
 const Item = ({ id, image, price, vertical, title }) => {
   return (
@@ -13,12 +14,16 @@ const Item = ({ id, image, price, vertical, title }) => {
           image={image}
           alt={vertical}
           title={title}
-          page='browse'
         />
       </Link>
-      <span>
-        {price}
-      </span>
+      <div className={itemStyles.iteminfo}>
+        <span>
+          {price}
+        </span>
+        <FavoriteIcon
+          page='browse'
+        />
+      </div>
     </div>
   )
 }

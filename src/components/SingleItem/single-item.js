@@ -12,6 +12,7 @@ import Meta from './Meta/meta';
 import Description from './Description/description';
 
 import singleItemStyles from './single-item.module.scss';
+import FavoriteIcon from '../FavoriteIcon/favorite-icon';
 
 
 const Item = () => {
@@ -57,7 +58,13 @@ const Item = () => {
               image={item.image}
               alt={item.vertical}
               page='single'
-            />
+              id={item.id}
+            >
+              <FavoriteIcon
+                page='single'
+              />
+            </Image>
+
           </Column>
           <Column>
             <Row>

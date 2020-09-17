@@ -10,22 +10,4 @@
     background: $grey2;
     position: relative;
   }
-
-  &heartsingle {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  &heartbrowse {
-    position: absolute;
-    bottom: -8%;
-    right: 2%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
 }
