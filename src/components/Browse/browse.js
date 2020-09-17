@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
+
+import StateContext from '../../StateContext';
+import DispatchContext from '../../DispatchContext';
 
 import Layout from './Layout/layout'
 import Loader from '../Loader/loader'
@@ -8,6 +11,9 @@ import LoadMoreButton from './LoadMoreButton/load-more-button'
 import browseStyles from './browse.module.scss';
 
 const Browse = () => {
+
+  const appState = useContext(StateContext);
+  const appDispatch = useContext(DispatchContext);
 
   const [items, setItems] = useState([]);
   const [start, setStart] = useState(0);
@@ -36,9 +42,22 @@ const Browse = () => {
     }
   }
 
+  async function fetchFavorites(browseRequest) {
+    setLoading(true);
+    try {
+      const response = await Axios.get(`/favorites`, { cancelToken: browseRequest.token });
+      appDispatch({ type: 'setFavorites', data: response.data.items });
+      setLoading(false);
+
+    } catch (e) {
+      console.log("There was a problem or the request was cancelled.");
+    }
+  }
+
   useEffect(() => {
     const browseRequest = Axios.CancelToken.source();
     fetchBrowse(browseRequest);
+    fetchFavorites(browseRequest);
     return () => {
       browseRequest.cancel();
     };// eslint-disable-next-line
@@ -59,23 +78,22 @@ const Browse = () => {
       <h1 className={browseStyles.browsetitle}>
         Browse page
         </h1>
-      <>
-        <Layout
-          items={items}
+
+      <Layout
+        items={items}
+      />
+      {loading
+        ? <Loader />
+        : ''
+      }
+      {start + limit < dataLength
+        ?
+        <LoadMoreButton
+          handleLoadMore={handleLoadMore}
         />
-        {loading
-          ? <Loader />
-          : ''
-        }
-        {start + limit < dataLength
-          ?
-          <LoadMoreButton
-            handleLoadMore={handleLoadMore}
-          />
-          :
-          ''
-        }
-      </>
+        :
+        ''
+      }
     </div>
   )
 

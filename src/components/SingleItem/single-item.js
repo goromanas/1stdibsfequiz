@@ -61,6 +61,7 @@ const Item = () => {
               id={item.id}
             >
               <FavoriteIcon
+                id={item.id}
                 page='single'
               />
             </Image>

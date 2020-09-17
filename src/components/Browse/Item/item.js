@@ -21,6 +21,7 @@ const Item = ({ id, image, price, vertical, title }) => {
           {price}
         </span>
         <FavoriteIcon
+          id={id}
           page='browse'
         />
       </div>

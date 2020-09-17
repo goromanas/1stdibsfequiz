@@ -36,7 +36,9 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "^3.4.3",
         "react-tooltip": "^4.2.10",
-        "sass": "^1.26.10"
+        "react-transition-group": "^4.4.1",
+        "sass": "^1.26.10",
+        "use-immer": "^0.4.1"
     },
     "devDependencies": {
         "nodemon": "^1.17.5"
