@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+import Axios from 'axios';
 
 import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
 
 import favoriteIconStyles from './favorite-icon.module.scss';
-const favorite = false;
 const FavoriteIcon = ({ page, id }) => {
 
   const appState = useContext(StateContext);
@@ -27,11 +27,25 @@ const FavoriteIcon = ({ page, id }) => {
   )
 
   function handleFavorite() {
+    let items;
+    let action;
     if (appState.favorites.includes(id)) {
-      appDispatch({ type: 'removeFavorite', item: id });
-
+      action = 'removeFavorite';
+      items = [...appState.favorites];
+      items.splice(items.indexOf(id), 1);
     } else {
-      appDispatch({ type: 'addFavorite', item: id });
+      action = 'addFavorite';
+      items = [...appState.favorites, id];
+    }
+    appDispatch({ type: action, item: id });
+    postFavorites(items);
+  }
+
+  async function postFavorites(items) {
+    try {
+      await Axios.post(`/saveFavorites`, { items: items });
+    } catch (e) {
+      console.log("There was a problem or the request was cancelled.");
     }
   }
 }

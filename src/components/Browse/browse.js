@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 
-import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
 
 import Layout from './Layout/layout'
@@ -12,7 +11,6 @@ import browseStyles from './browse.module.scss';
 
 const Browse = () => {
 
-  const appState = useContext(StateContext);
   const appDispatch = useContext(DispatchContext);
 
   const [items, setItems] = useState([]);

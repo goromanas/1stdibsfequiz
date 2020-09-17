@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useImmerReducer } from "use-immer";
 
-
 import StateContext from "./StateContext";
 import DispatchContext from "./DispatchContext";
 

@@ -22,8 +22,6 @@ const Item = () => {
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState({});
 
-
-
   useEffect(() => {
     const itemRequest = Axios.CancelToken.source();
     async function fetchItem() {
