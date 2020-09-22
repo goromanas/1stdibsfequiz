@@ -1,6 +1,5 @@
 const express = require('express');
-const cachedItems = require('../data/favorites.json');
-;
+
 
 const favoritesRoute = express.Router();
 
