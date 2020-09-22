@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Axios from 'axios';
 
 import StateContext from '../../StateContext';
 import DispatchContext from '../../DispatchContext';
@@ -38,15 +37,6 @@ const FavoriteIcon = ({ page, id }) => {
       items = [...appState.favorites, id];
     }
     appDispatch({ type: action, item: id });
-    postFavorites(id, action);
-  }
-
-  async function postFavorites(id, action) {
-    try {
-      await Axios.post(`/saveFavorites`, { id: id, action: action });
-    } catch (e) {
-      console.log("There was a problem or the request was cancelled.");
-    }
   }
 }
 
