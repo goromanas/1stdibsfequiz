@@ -28,7 +28,7 @@ const Browse = () => {
         draft.loading = action.value;
         return;
       case 'setItems':
-        draft.items = action.data;
+        draft.items = [...draft.items, ...action.data];
         return;
       case 'setDataLength':
         draft.dataLength = action.data;
