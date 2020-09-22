@@ -11,19 +11,18 @@ import Item from './components/SingleItem/single-item'
 
 function App() {
   const initialState = {
-    favorites: []
+    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   };
 
   function favoriteReducer(draft, action) {
     switch (action.type) {
-      case 'setFavorites':
-        draft.favorites = [...action.data];
-        return;
       case 'addFavorite':
         draft.favorites.push(action.item);
+        localStorage.setItem('favorites', JSON.stringify(draft.favorites));
         return;
       case 'removeFavorite':
         draft.favorites.splice(draft.favorites.indexOf(action.item), 1);
+        localStorage.setItem('favorites', JSON.stringify(draft.favorites));
         return;
       default: break;
     }

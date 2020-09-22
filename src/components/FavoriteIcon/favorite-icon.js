@@ -38,12 +38,12 @@ const FavoriteIcon = ({ page, id }) => {
       items = [...appState.favorites, id];
     }
     appDispatch({ type: action, item: id });
-    postFavorites(items);
+    postFavorites(id, action);
   }
 
-  async function postFavorites(items) {
+  async function postFavorites(id, action) {
     try {
-      await Axios.post(`/saveFavorites`, { items: items });
+      await Axios.post(`/saveFavorites`, { id: id, action: action });
     } catch (e) {
       console.log("There was a problem or the request was cancelled.");
     }

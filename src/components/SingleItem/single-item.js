@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Axios from 'axios';
-
-import DispatchContext from '../../DispatchContext';
 
 import Layout from './Layout/layout';
 import Column from './Column/column';
@@ -13,6 +11,7 @@ import Buttons from './Buttons/buttons';
 import Meta from './Meta/meta';
 import Description from './Description/description';
 import Navigation from './Navigation/navigation';
+import Error from '../Error/error';
 
 import singleItemStyles from './single-item.module.scss';
 
@@ -23,10 +22,9 @@ const Item = () => {
 
   const { id } = useParams();
 
-  const appDispatch = useContext(DispatchContext);
-
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState({});
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const itemRequest = Axios.CancelToken.source();
@@ -37,23 +35,12 @@ const Item = () => {
         setItem(response.data);
         setLoading(false);
       } catch (e) {
-        console.log("There was a problem or the request was cancelled.");
-      }
-    }
-
-    async function fetchFavorites(browseRequest) {
-      setLoading(true);
-      try {
-        const response = await Axios.get(`/favorites`, { cancelToken: browseRequest.token });
-        appDispatch({ type: 'setFavorites', data: response.data.items });
+        setError(true);
         setLoading(false);
-
-      } catch (e) {
-        console.log("There was a problem or the request was cancelled.");
       }
     }
+
     fetchItem(itemRequest);
-    fetchFavorites(itemRequest);
     return () => {
       itemRequest.cancel();
     }; // eslint-disable-next-line
@@ -65,37 +52,41 @@ const Item = () => {
           {item.seller !== undefined ? item.seller.company : ''}
         </h2>
         <Navigation />
-        <Layout>
-          <Column>
-            <Image
-              image={item.image}
-              alt={item.vertical}
-              page='single'
-              id={item.id}
-            >
-              <FavoriteIcon
-                id={item.id}
+        {error
+          ? <Error />
+          :
+          <Layout>
+            <Column>
+              <Image
+                image={item.image}
+                alt={item.vertical}
                 page='single'
-              />
-            </Image>
-          </Column>
-          <Column>
-            <Row>
-              <Meta
-                title={item.title}
-                price={item.price}
-                measurements={item.measurements}
-              />
-              <Buttons />
-            </Row>
-            <Row>
-              <Description
-                description={item.description}
-                creators={item.creators}
-              />
-            </Row>
-          </Column>
-        </Layout>
+                id={item.id}
+              >
+                <FavoriteIcon
+                  id={item.id}
+                  page='single'
+                />
+              </Image>
+            </Column>
+            <Column>
+              <Row>
+                <Meta
+                  title={item.title}
+                  price={item.price}
+                  measurements={item.measurements}
+                />
+                <Buttons />
+              </Row>
+              <Row>
+                <Description
+                  description={item.description}
+                  creators={item.creators}
+                />
+              </Row>
+            </Column>
+          </Layout>
+        }
       </>
       }
     </>
